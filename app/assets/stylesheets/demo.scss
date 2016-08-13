@@ -1,0 +1,131 @@
+// Place all the styles related to the demo controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.console{
+  width:auto !important;
+  min-width: 600px;
+  bottom: auto !important;
+  background: #fefcf8 none repeat scroll 0 0 !important;
+  height: 148px;
+  color: #99968a !important;
+  position: relative !important;
+  margin-top: 150px !important;
+  float: right;
+  .console-inner{
+    font-size: 15px !important;
+    color: #99968a !important;
+    background: #fefcf8 none repeat scroll 0 0 !important;
+    .console-prompt-box{
+      .console-prompt-label{
+        background: #fefcf8 none repeat scroll 0 0 !important;
+        color: #99968a
+      }
+      .console-prompt-display{
+        background: #fefcf8 none repeat scroll 0 0 !important;
+        color: #99968a;
+      .console-cursor{
+        background: #ccc;
+      }
+      }
+    }
+    .console-message{
+      background: #fefcf8 none repeat scroll 0 0 !important;
+      color: #99968a
+    }
+  }
+  .resizer{
+    background: #fefcf8 none repeat scroll 0 0 !important;
+    color: #99968a
+  }
+}
+// Place all the styles related to the demo controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.console{
+  width:auto !important;
+  min-width: 600px;
+  bottom: auto !important;
+  background: #fefcf8 none repeat scroll 0 0 !important;
+  height: 148px;
+  color: #99968a !important;
+  position: relative !important;
+  margin-top: 150px !important;
+  float: right;
+  .console-inner{
+    font-size: 15px !important;
+    color: #99968a !important;
+    background: #fefcf8 none repeat scroll 0 0 !important;
+    .console-prompt-box{
+      .console-prompt-label{
+        background: #fefcf8 none repeat scroll 0 0 !important;
+        color: #99968a
+      }
+      .console-prompt-display{
+        background: #fefcf8 none repeat scroll 0 0 !important;
+        color: #99968a;
+        .console-cursor{
+          background: #ccc;
+        }
+      }
+    }
+    .console-message{
+      background: #fefcf8 none repeat scroll 0 0 !important;
+      color: #99968a;
+      overflow: hidden;
+    }
+  }
+  .resizer{
+    background: #fefcf8 none repeat scroll 0 0 !important;
+    color: #99968a
+  }
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+  text-align: center;
+	list-style-type: none;
+	color: #ccc;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: #ccc;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #ccc;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: white;
+}

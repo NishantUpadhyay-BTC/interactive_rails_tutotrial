@@ -1,0 +1,116 @@
+<div class="row section-div ">
+  <div class="col s6 content_div">
+    <h4>Introduction</h4>
+    <pre class="brush: ruby">
+      class Person < ActiveRecord::Base
+        validates :name, presence: true
+      end
+
+      Person.create(name: "John Doe").valid? # => true
+      Person.create(name: nil).valid? # => false
+    </pre>
+    <p class="flow-text">
+      As you can see, our validation lets us know that our Person is not valid without a name attribute.
+    </p>
+    <hr>
+
+    <h5>Why Use Validations?</h5>
+    <ul class="collapsible popout" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">DB constraints or stored procedures make validation mechanisms DB-dependent</div>
+        <div class="collapsible-body">
+          <p class="flow-text">
+            Database constraints and/or stored procedures make the validation mechanisms database-dependent and can make testing and maintenance more difficult. However, if your database is used by other applications, it may be a good idea to use some constraints at the database level. Additionally, database-level validations can safely handle some things (such as uniqueness in heavily-used tables) that can be difficult to implement otherwise.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Client-side validations can be useful but unreliable and can be bypassed</div>
+        <div class="collapsible-body">
+          <p class="flow-text">
+            Client-side validations can be useful, but are generally unreliable if used alone. If they are implemented using JavaScript, they may be bypassed if JavaScript is turned off in the user's browser. However, if combined with other techniques, client-side validation can be a convenient way to provide users with immediate feedback as they use your site.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Controller-level validations can be tempting but try to keep it skiny</div>
+        <div class="collapsible-body">
+          <p class="flow-text">
+            Controller-level validations can be tempting to use, but often become unwieldy and difficult to test and maintain. Whenever possible, it's a good idea to keep your controllers skinny, as it will make your application a pleasure to work with in the long run.
+          </p>
+        </div>
+      </li>
+    </ul>
+    <hr>
+    <h5>When Does Validation Happen?</h5>
+    <p class="flow-text">
+      Creating and saving a new record will send an SQL INSERT operation to the database. Updating an existing record will send an SQL UPDATE operation instead. Validations are typically run before these commands are sent to the database. If any validations fail, the object will be marked as invalid and Active Record will not perform the INSERT or UPDATE operation.
+    </p>
+
+    <p class="flow-text">
+      The following methods trigger validations, and will save the object to the database only if the object is valid:
+    </p>
+    <ol class="flow-text">
+      <li>create</li>
+      <li>create!</li>
+      <li>save</li>
+      <li>save!</li>
+      <li>update</li>
+      <li>update!</li>
+    </ol>
+    <p class="flow-text">
+      The bang versions (e.g. save!) raise an exception if the record is invalid. The non-bang versions don't, save and update return false, create just returns the object.
+    </p>
+    <h5>Skipping Validations</h5>
+    <p class="flow-text">The following methods skip validations</p>
+    <ol class="flow-text">
+      <li>decrement!</li>
+      <li>decrement_counter</li>
+      <li>increment!</li>
+      <li>increment_counter</li>
+      <li>toggle!</li>
+      <li>touch</li>
+      <li>update_all</li>
+      <li>update_attribute</li>
+      <li>update_column</li>
+      <li>update_columns</li>
+      <li>update_counters</li>
+    </ol>
+    <blockquote class="flow-text">
+      Note that save also has the ability to skip validations if passed validate:
+      false as argument. This technique should be used with caution.
+      <b>save(validate: false)</b>
+    </blockquote>
+    <hr>
+    <p class="flow-text">
+      To verify whether or not an object is valid, Rails uses the valid? method. You can also use this method on your own. valid? triggers your validations and returns true if no errors were found in the object, and false otherwise
+    </p>
+    <h5>valid? and invalid?</h5>
+    <pre class="brush: ruby">
+      class Person < ActiveRecord::Base
+        validates :name, presence: true
+      end
+
+      Person.create(name: "John Doe").valid? # => true
+      Person.create(name: nil).valid? # => false
+    </pre>
+    <p class="flow-text">invalid? is simply the inverse of valid?</p>
+  </div>
+  <div class="col s6">
+    <div class="console-font"><b>Interactive Rails console Ready</b></div>
+    <%= render "shared/interactive_console"%>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    SyntaxHighlighter.all();
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+
+    $('#console').style('margin-top', "-465px", 'important')
+    $(".content_div").mCustomScrollbar({
+      theme:"rounded-dark"
+    });
+  })
+</script>

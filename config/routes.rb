@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'demo#new'
+  root 'rails_validations#index'
+  get '/validation_helpers' => 'rails_validations#validation_helpers'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

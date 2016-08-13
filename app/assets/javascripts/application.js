@@ -12,7 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require jquery
 //= require materialize-sprockets
+//= require syntax-highlighter-rails/shCore
+//= require syntax-highlighter-rails/shBrushRuby
+//= require jquery.mCustomScrollbar
 //= require_tree .

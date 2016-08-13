@@ -1,28 +1,60 @@
 // Place all the styles related to the demo controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.page-title{
+    font-size: 48px;
+    margin-left: 20px
+}
+.flow-text{
+    font-size: 1.40rem !important
+}
+.flow-text-header{
+  font-size: 1.40rem !important;
+  font-weight: initial !important;
+}
+hr{
+  color: #d1d1d1;
+}
+ol li span.listItem{font-size:15px;}
+blockquote{
+  background: #e0e0e0 none repeat scroll 0 0;
+}
+.console-font{
+  background: #fefcf8 none repeat scroll 0 0 !important;
+  color: #4a473a;
+  padding: 10px;
+  font-family: Courier,monospace;
+}
+
 .console{
   width:auto !important;
-  min-width: 600px;
+  min-width: 650px;
   bottom: auto !important;
   background: #fefcf8 none repeat scroll 0 0 !important;
-  height: 148px;
-  color: #99968a !important;
+  min-height: 445px;
+  margin-right: 10px !important;
+  color: #4a473a !important;
   position: relative !important;
-  margin-top: 150px !important;
+  margin-top: -730px ;
   float: right;
   .console-inner{
     font-size: 15px !important;
-    color: #99968a !important;
+    font-family: Courier,monospace;
+    color: #4a473a !important;
     background: #fefcf8 none repeat scroll 0 0 !important;
+    .console-message{
+      overflow: -moz-hidden-unscrollable !important;
+    }
     .console-prompt-box{
       .console-prompt-label{
         background: #fefcf8 none repeat scroll 0 0 !important;
-        color: #99968a
+        color: #99968a;
+        font-family: Courier,monospace;
       }
       .console-prompt-display{
         background: #fefcf8 none repeat scroll 0 0 !important;
-        color: #99968a;
+        color: #4a473a;
+        font-family: Courier,monospace;
       .console-cursor{
         background: #ccc;
       }
@@ -30,53 +62,14 @@
     }
     .console-message{
       background: #fefcf8 none repeat scroll 0 0 !important;
-      color: #99968a
+      color: #4a473a;
+      font-family: Courier,monospace;
     }
   }
   .resizer{
     background: #fefcf8 none repeat scroll 0 0 !important;
-    color: #99968a
-  }
-}
-// Place all the styles related to the demo controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-.console{
-  width:auto !important;
-  min-width: 600px;
-  bottom: auto !important;
-  background: #fefcf8 none repeat scroll 0 0 !important;
-  height: 148px;
-  color: #99968a !important;
-  position: relative !important;
-  margin-top: 150px !important;
-  float: right;
-  .console-inner{
-    font-size: 15px !important;
-    color: #99968a !important;
-    background: #fefcf8 none repeat scroll 0 0 !important;
-    .console-prompt-box{
-      .console-prompt-label{
-        background: #fefcf8 none repeat scroll 0 0 !important;
-        color: #99968a
-      }
-      .console-prompt-display{
-        background: #fefcf8 none repeat scroll 0 0 !important;
-        color: #99968a;
-        .console-cursor{
-          background: #ccc;
-        }
-      }
-    }
-    .console-message{
-      background: #fefcf8 none repeat scroll 0 0 !important;
-      color: #99968a;
-      overflow: hidden;
-    }
-  }
-  .resizer{
-    background: #fefcf8 none repeat scroll 0 0 !important;
-    color: #99968a
+    color: #4a473a;
+    font-family: Courier,monospace;
   }
 }
 /*progressbar*/
@@ -91,8 +84,8 @@
 	list-style-type: none;
 	color: #ccc;
 	text-transform: uppercase;
-	font-size: 9px;
-	width: 33.33%;
+	font-size: 12px;
+	width: 13.33%;
 	float: left;
 	position: relative;
 }
@@ -128,4 +121,8 @@
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: #27AE60;
 	color: white;
+}
+.content_div{
+  border-right: 1px solid #ccc;
+  height: 487px
 }

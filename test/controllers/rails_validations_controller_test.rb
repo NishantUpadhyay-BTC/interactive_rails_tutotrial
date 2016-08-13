@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DemoControllerTest < ActionController::TestCase
+class RailsValidationsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,0 +1,28 @@
+<div class="row section-div ">
+  <div class="col s6 content_div">
+    <h4>Custom Validations</h4>
+    <ul>
+      <li>
+        <h5 class="flow-text-header">Custom Validators</h5>
+        <p class="flow-text">
+          Custom validators are classes that inherit from ActiveModel::Validator.
+          These classes must implement the validate method which takes a record as an
+          argument and performs the validation on it. The custom validator is called
+          using the validates_with method.
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="col s6">
+    <%= render "shared/interactive_console"%>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    SyntaxHighlighter.all();
+    $('#console').style('margin-top', "-465px", 'important')
+    $(".content_div").mCustomScrollbar({
+      theme:"rounded-dark"
+    });
+  })
+</script>

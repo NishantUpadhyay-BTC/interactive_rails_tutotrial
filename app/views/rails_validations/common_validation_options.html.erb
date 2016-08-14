@@ -1,0 +1,92 @@
+<div class="row section-div ">
+  <div class="col s6 content_div">
+    <h4>Common Validation Options</h4>
+    <ol>
+      <li>
+        <h5 class="flow-text-header">:allow_nil</h5>
+        <p class="flow-text">
+          The :allow_nil option skips the validation when the value being
+          validated is nil.
+        </p>
+        <pre class="brush: ruby">
+          class Coffee < ApplicationRecord
+            validates :size, inclusion: { in: %w(small medium large),
+              message: "%{value} is not a valid size" }, allow_nil: true
+          end
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">:allow_blank</h5>
+        <p class="flow-text">The :allow_blank option is similar to the :allow_nil
+          option. This option will let validation pass if the attribute's value is
+          blank?, like nil or an empty string for example.</p>
+        <pre class="brush: ruby">
+          class Topic < ApplicationRecord
+            validates :title, length: { is: 5 }, allow_blank: true
+          end
+
+          Topic.create(title: "").valid?  # => true
+          Topic.create(title: nil).valid? # => true
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">:message</h5>
+        <p class="flow-text">
+          As you've already seen, the :message option lets you specify the message
+           that will be added to the errors collection when validation fails.
+         </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            # Hard-coded message
+            validates :name, presence: { message: "must be given please" }
+
+            # Message with dynamic attribute value. %{value} will be replaced with
+            # the actual value of the attribute. %{attribute} and %{model} also
+            # available.
+            validates :age, numericality: { message: "%{value} seems wrong" }
+
+            # Proc
+            validates :username,
+              uniqueness: {
+                # object = person object being validated
+                # data = { model: "Person", attribute: "Username", value: <username> }
+                message: ->(object, data) do
+                  "Hey #{object.name}!, #{data[:value]} is taken already! Try again #{Time.zone.tomorrow}"
+                end
+              }
+          end
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">:on</h5>
+        <p class="flow-text">
+          The :on option lets you specify when the validation should happen.
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            # it will be possible to update email with a duplicated value
+            validates :email, uniqueness: true, on: :create
+
+            # it will be possible to create the record with a non-numerical age
+            validates :age, numericality: true, on: :update
+
+            # the default (validates on both create and update)
+            validates :name, presence: true
+          end
+        </pre>
+      </li>
+    </ol>
+  </div>
+  <div class="col s6">
+    <%= render "shared/interactive_console"%>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    SyntaxHighlighter.all();
+    $('#console').style('margin-top', "-465px", 'important')
+    $(".content_div").mCustomScrollbar({
+      theme:"rounded-dark"
+    });
+  })
+</script>

@@ -1,0 +1,91 @@
+<div class="row section-div ">
+  <div class="col s6 content_div">
+    <h4>Conditional Validation</h4>
+    <ol>
+      <li>
+        <h5 class="flow-text-header">Using a Symbol with :if and :unless</h5>
+        <p class="flow-text">
+          You can associate the :if and :unless options with a symbol corresponding
+          to the name of a method that will get called right before validation happens.
+          This is the most commonly used option
+        </p>
+        <pre class="brush: ruby">
+          class Order < ApplicationRecord
+            validates :card_number, presence: true, if: :paid_with_card?
+
+            def paid_with_card?
+              payment_type == "card"
+            end
+          end
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">Using a String with :if and :unless</h5>
+        <p class="flow-text">You can also use a string that will be evaluated using
+          eval and needs to contain valid Ruby code. You should use this option only
+          when the string represents a really short condition.</p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            validates :surname, presence: true, if: "name.nil?"
+          end
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">Using a Proc with :if and :unless</h5>
+        <p class="flow-text">
+          it's possible to associate :if and :unless with a Proc object which
+          will be called. Using a Proc object gives you the ability to write an
+          inline condition instead of a separate method.
+        </p>
+        <pre class="brush: ruby">
+          class Account < ApplicationRecord
+            validates :password, confirmation: true,
+              unless: Proc.new { |a| a.password.blank? }
+          end
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">Grouping Conditional validations</h5>
+        <p class="flow-text">
+          Sometimes it is useful to have multiple validations use one condition.
+           It can be easily achieved using with_options.
+        </p>
+        <pre class="brush: ruby">
+          class User < ApplicationRecord
+            with_options if: :is_admin? do |admin|
+              admin.validates :password, length: { minimum: 10 }
+              admin.validates :email, presence: true
+            end
+          end
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">Combining Validation Conditions</h5>
+        <p class="flow-text">
+          On the other hand, when multiple conditions define whether or not a
+          validation should happen, an Array can be used. Moreover, you can
+          apply both :if and :unless to the same validation.
+        </p>
+        <pre class="brush: ruby">
+          class Computer < ApplicationRecord
+            validates :mouse, presence: true,
+                              if: ["market.retail?", :desktop?],
+                              unless: Proc.new { |c| c.trackpad.present? }
+          end
+        </pre>
+      </li>
+    </ol>
+  </div>
+  <div class="col s6">
+    <%= render "shared/interactive_console"%>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    SyntaxHighlighter.all();
+    $('#console').style('margin-top', "-465px", 'important')
+    $(".content_div").mCustomScrollbar({
+      theme:"rounded-dark"
+    });
+  })
+</script>

@@ -1,0 +1,33 @@
+<div class="row section-div ">
+  <div class="col s6 content_div">
+    <h4>Strict Validation</h4>
+    <p class="flow-text">You can also specify validations to be strict and raise ActiveModel::StrictValidationFailed when the object is invalid.</p>
+    <pre class="brush: ruby">
+      class Person < ApplicationRecord
+        validates :name, presence: { strict: true }
+      end
+
+      Person.new.valid?  # => ActiveModel::StrictValidationFailed: Name can't be blank
+    </pre>
+    <p class="flow-text">There is also the ability to pass a custom exception to the :strict option.</p>
+    <pre class="brush: ruby">
+      class Person < ApplicationRecord
+        validates :token, presence: true, uniqueness: true, strict: TokenGenerationException
+      end
+
+      Person.new.valid?  # => TokenGenerationException: Token can't be blank
+    </pre>
+  </div>
+  <div class="col s6">
+    <%= render "shared/interactive_console"%>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    SyntaxHighlighter.all();
+    $('#console').style('margin-top', "-465px", 'important')
+    $(".content_div").mCustomScrollbar({
+      theme:"rounded-dark"
+    });
+  })
+</script>

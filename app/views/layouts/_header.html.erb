@@ -2,6 +2,21 @@
   <nav class="indigo z-depth-0">
     <div class="nav-wrapper">
       <a class="page-title">RailsTutorials</a>
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="javascript:;">Active Record Validations</a></li>
+        <li><a href="javascript:;">Active Record Callbacks</a></li>
+      </ul>
+      <ul class="right">
+        <li><a class="active" href="javascript:;">Home</a></li>
+        <li><a class="dropdown-button" href="#" data-activates="dropdown1">Tutorial Index</a></li>
+        <li><a href="javascript:;">Contribute</a></li>
+        <li><a href="javascript:;">Credits</a></li>
+      </ul>
     </div>
   </nav>
 </div>
+<script>
+  $(document).ready(function(){
+    $(".dropdown-button").dropdown();
+  })
+</script>

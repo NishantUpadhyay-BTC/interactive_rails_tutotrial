@@ -6,11 +6,18 @@
     margin-left: 20px
 }
 .flow-text{
-    font-size: 1.40rem !important
+    font-size: 1.30rem !important
+}
+p{
+  font-size: 1.30rem !important;
+  text-align: justify;
 }
 .flow-text-header{
-  font-size: 1.40rem !important;
+  font-size: 1.30rem !important;
   font-weight: initial !important;
+}
+nav ul a.active{
+  background-color: rgba(0, 0, 0, 0.1);
 }
 hr{
   color: #d1d1d1;

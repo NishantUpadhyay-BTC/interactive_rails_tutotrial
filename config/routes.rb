@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get 'strict_validations' => 'rails_validations#strict_validations'
   get 'conditional_validations' => 'rails_validations#conditional_validations'
   get 'custom_validations' => 'rails_validations#custom_validations'
+  get 'play_with_errors' => 'rails_validations#play_with_errors'
 end

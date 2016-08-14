@@ -1,9 +1,15 @@
 <ul id="progressbar">
-  <li class="active">Introduction</li>
-  <li>Validation Helpers</li>
-  <li>Common Validation Options</li>
-  <li>Strict Validations</li>
-  <li>Conditional Validations</li>
-  <li>Custom Validations</li>
-  <li>Playing with Validation Errors</li>
+
+  <li class="active tooltipped" data-position="bottom" data-delay="50" data-tooltip="Introduction">Introduction</li>
+  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Validation Helpers">Validation Helpers</li>
+  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Common Validation Options">Common Validation Options</li>
+  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Strict Validations">Strict Validations</li>
+  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Conditional Validations">Conditional Validations</li>
+  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Custom Validations">Custom Validations</li>
+  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Playing with Validation Errors">Playing with Validation Errors</li>
 </ul>
+<script>
+$(document).ready(function(){
+ $('.tooltipped').tooltip({delay: 50});
+});
+</script>

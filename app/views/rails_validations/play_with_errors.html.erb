@@ -1,0 +1,222 @@
+<div class="row section-div ">
+  <div class="col s6 content_div">
+    <h4>Playing with Validation Errors</h4>
+    <p class="flow-text">
+      Rails provides a number of methods for working with the
+      errors collection and inquiring about the validity of objects
+     </p>
+     <p class="flow-text">
+       The following is a list of the most commonly used methods:
+     </p>
+    <ul>
+      <li>
+        <h5 class="flow-text-header">errors</h5>
+        <p class="flow-text">
+          Returns an instance of the class ActiveModel::Errors containing all errors
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            validates :name, presence: true, length: { minimum: 3 }
+          end
+
+          person = Person.new
+          person.valid? # => false
+          person.errors.messages
+           # => {:name=>["can't be blank", "is too short (minimum is 3 characters)"]}
+
+          person = Person.new(name: "John Doe")
+          person.valid? # => true
+          person.errors.messages # => {}
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">errors[]</h5>
+        <p class="flow-text">
+          errors[] is used when you want to check the error messages for a
+          specific attribute
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            validates :name, presence: true, length: { minimum: 3 }
+          end
+
+          person = Person.new(name: "John Doe")
+          person.valid? # => true
+          person.errors[:name] # => []
+
+          person = Person.new(name: "JD")
+          person.valid? # => false
+          person.errors[:name] # => ["is too short (minimum is 3 characters)"]
+
+          person = Person.new
+          person.valid? # => false
+          person.errors[:name]
+           # => ["can't be blank", "is too short (minimum is 3 characters)"]
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">errors.add</h5>
+        <p class="flow-text">
+          The add method lets you add an error message related to a particular
+          attribute. It takes as arguments the attribute and the error message.
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            def a_method_used_for_validation_purposes
+              errors.add(:name, "cannot contain the characters !@#%*()_-+=")
+            end
+          end
+
+          person = Person.create(name: "!@#")
+
+          person.errors[:name]
+           # => ["cannot contain the characters !@#%*()_-+="]
+
+          person.errors.full_messages
+           # => ["Name cannot contain the characters !@#%*()_-+="]
+        </pre>
+        <p class="flow-text">
+          An equivalent to errors#add is to use << to append a message to the
+          errors.messages array for an attribute
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            def a_method_used_for_validation_purposes
+              errors.messages[:name] << "cannot contain the characters !@#%*()_-+="
+            end
+          end
+
+          person = Person.create(name: "!@#")
+
+          person.errors[:name]
+           # => ["cannot contain the characters !@#%*()_-+="]
+
+          person.errors.to_a
+           # => ["Name cannot contain the characters !@#%*()_-+="]
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">errors.details</h5>
+        <p class="flow-text">
+          You can specify a validator type to the returned error details hash
+          using the errors.add method.
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            def a_method_used_for_validation_purposes
+              errors.add(:name, :invalid_characters)
+            end
+          end
+
+          person = Person.create(name: "!@#")
+
+          person.errors.details[:name]
+          # => [{error: :invalid_characters}]
+        </pre>
+        <p class="flow-text">
+          To improve the error details to contain the unallowed characters set
+          for instance, you can pass additional keys to errors.add.
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            def a_method_used_for_validation_purposes
+              errors.add(:name, :invalid_characters, not_allowed: "!@#%*()_-+=")
+            end
+          end
+
+          person = Person.create(name: "!@#")
+
+          person.errors.details[:name]
+          # => [{error: :invalid_characters, not_allowed: "!@#%*()_-+="}]
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">errors[:base]</h5>
+        <p class="flow-text">
+          You can add error messages that are related to the object's state as
+          a whole, instead of being related to a specific attribute.
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            def a_method_used_for_validation_purposes
+              errors[:base] << "This person is invalid because ..."
+            end
+          end
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">errors.clear</h5>
+        <p class="flow-text">
+          The clear method is used when you intentionally want to clear all the
+          messages in the errors collection.
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            validates :name, presence: true, length: { minimum: 3 }
+          end
+
+          person = Person.new
+          person.valid? # => false
+          person.errors[:name]
+           # => ["can't be blank", "is too short (minimum is 3 characters)"]
+
+          person.errors.clear
+          person.errors.empty? # => true
+
+          person.save # => false
+
+          person.errors[:name]
+          # => ["can't be blank", "is too short (minimum is 3 characters)"]
+        </pre>
+      </li>
+      <li>
+        <h5 class="flow-text-header">errors.size</h5>
+        <p class="flow-text">
+          The size method returns the total number of error messages for the object.
+        </p>
+        <pre class="brush: ruby">
+          class Person < ApplicationRecord
+            validates :name, presence: true, length: { minimum: 3 }
+          end
+
+          person = Person.new
+          person.valid? # => false
+          person.errors.size # => 2
+
+          person = Person.new(name: "Andrea", email: "andrea@example.com")
+          person.valid? # => true
+          person.errors.size # => 0
+        </pre>
+      </li>
+    </ul>
+    <hr>
+    <p class="flow-text-header">
+      Displaying Validation Errors in Views
+    </p>
+    <pre class="brush: ruby">
+      <%% if @article.errors.any? %>
+        <div id="error_explanation">
+          <h2><%%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+          <ul>
+          <%% @article.errors.full_messages.each do |msg| %>
+            <li><%%= msg %></li>
+          <%% end %>
+          </ul>
+        </div>
+      <%% end %>
+    </pre>
+  </div>
+  <div class="col s6">
+    <%= render "shared/interactive_console"%>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    SyntaxHighlighter.all();
+    $('#console').style('margin-top', "-485px", 'important')
+    $(".content_div").mCustomScrollbar({
+      theme:"rounded-dark"
+    });
+  })
+</script>

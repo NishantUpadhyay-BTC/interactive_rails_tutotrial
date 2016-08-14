@@ -87,13 +87,26 @@ blockquote{
 	/*CSS counters to number the steps*/
 	counter-reset: step;
 }
-#progressbar li {
+#progressbar li{
+  text-decoration: none;
   text-align: center;
 	list-style-type: none;
 	color: #ccc;
 	text-transform: uppercase;
 	font-size: 12px;
 	width: 13.33%;
+	float: left;
+	position: relative;
+}
+
+#progressbar li a{
+  text-decoration: none;
+  text-align: center;
+	list-style-type: none;
+	color: #ccc;
+	text-transform: uppercase;
+	font-size: 12px;
+	width: 100%;
 	float: left;
 	position: relative;
 }
@@ -126,7 +139,7 @@ blockquote{
 }
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
-#progressbar li.active:before,  #progressbar li.active:after{
+#progressbar li.active:before{
 	background: #3f51b5;
 	color: white;
 }

@@ -83,7 +83,9 @@
 </div>
 <script>
   $(document).ready(function(){
-    SyntaxHighlighter.all();
+    SyntaxHighlighter.all({
+      'quick-code': false
+    });
     $('#console').style('margin-top', "-485px", 'important')
     $(".content_div").mCustomScrollbar({
       theme:"rounded-dark"

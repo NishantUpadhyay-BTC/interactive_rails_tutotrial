@@ -1,12 +1,25 @@
 <ul id="progressbar">
-
-  <li class="active tooltipped" data-position="bottom" data-delay="50" data-tooltip="Introduction">Introduction</li>
-  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Validation Helpers">Validation Helpers</li>
-  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Common Validation Options">Common Validation Options</li>
-  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Strict Validations">Strict Validations</li>
-  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Conditional Validations">Conditional Validations</li>
-  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Custom Validations">Custom Validations</li>
-  <li class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Playing with Validation Errors">Playing with Validation Errors</li>
+  <li class= <%= "active" if params[:action] == 'index' %> >
+    <%= link_to 'Introduction', root_path, class: 'tooltipped', data: {position: 'bottom', delay: '50', tooltip: 'Introduction'} %>
+  </li>
+  <li class= <%= "active" if params[:action] == 'validation_helpers' %> >
+    <%= link_to 'Validation Helpers', validation_helpers_path, class: 'tooltipped', data: {position: 'bottom', delay: '50', tooltip: 'Validation Helpers'} %>
+  </li>
+  <li class= <%= "active" if params[:action] == 'common_validation_options' %> >
+    <%= link_to 'Common Validation Options', common_validation_options_path, class: 'tooltipped', data: {position: 'bottom', delay: '50', tooltip: 'Common Validation Options'} %>
+  </li>
+  <li class= <%= "active" if params[:action] == 'strict_validations' %> >
+    <%= link_to 'Strict Validations', strict_validations_path, class: 'tooltipped', data: {position: 'bottom', delay: '50', tooltip: 'Strict Validations'} %>
+  </li>
+  <li class= <%= "active" if params[:action] == 'conditional_validations' %> >
+    <%= link_to 'Conditional Validations', conditional_validations_path, class: 'tooltipped', data: {position: 'bottom', delay: '50', tooltip: 'Conditional Validations'} %>
+  </li>
+  <li class= <%= "active" if params[:action] == 'custom_validations' %> >
+    <%= link_to 'Custom Validations', custom_validations_path , class: 'tooltipped', data: {position: 'bottom', delay: '50', tooltip: 'Custom Validations'} %>
+  </li>
+  <li class= <%= "active" if params[:action] == 'play_with_errors' %> >
+    <%= link_to 'Playing with Validation Errors',  play_with_errors_path, class: 'tooltipped', data: {position: 'bottom', delay: '50', tooltip: 'Playing with Validation Errors'} %>
+  </li>
 </ul>
 <script>
 $(document).ready(function(){

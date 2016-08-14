@@ -229,7 +229,9 @@
   </div>
 <script>
 $(document).ready(function(){
-  SyntaxHighlighter.all();
+  SyntaxHighlighter.all({
+    'quick-code': false
+  });
   $('#console').style('margin-top', "0px", 'important')
   $(".content_div").mCustomScrollbar({
     theme:"rounded-dark"
